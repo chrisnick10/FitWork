@@ -32,11 +32,11 @@ public class HomeScreenUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 744, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 539, Short.MAX_VALUE)
         );
 
         pack();
@@ -68,7 +68,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(HomeScreenUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        System.out.println("I don't know what I am doing.");
+        System.out.println("I don't know what I am doing. This sucks");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
