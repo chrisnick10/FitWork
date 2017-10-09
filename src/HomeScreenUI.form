@@ -30,13 +30,13 @@
                   <Component id="jLabel1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" linkSize="1" min="-2" pref="245" max="-2" attributes="0"/>
+                          <Component id="jButton3" linkSize="1" min="-2" pref="245" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="107" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jPanel1" linkSize="1" max="32767" attributes="0"/>
+                          <Component id="jButton2" linkSize="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -114,9 +114,6 @@
           <Font name="Lucida Grande" size="13" style="1"/>
         </Property>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="FitWork"/>
-      </AccessibilityProperties>
 
       <Layout>
         <DimensionLayout dim="0">
