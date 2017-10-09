@@ -15,6 +15,8 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
      */
     public WorkoutLibraryUI() {
         initComponents();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
