@@ -1,3 +1,7 @@
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -146,7 +150,11 @@ public class HomeScreenUI extends javax.swing.JFrame {
          if (cmd.equals("Workout Library")) {
              System.out.println("Workout Library button pressed.");
              dispose();
-             new WorkoutLibraryUI();
+            try {
+                new WorkoutLibraryUI();
+            } catch (Exception ex) {
+                Logger.getLogger(HomeScreenUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
          }
     }//GEN-LAST:event_workoutLibraryButtonActionPerformed
 
