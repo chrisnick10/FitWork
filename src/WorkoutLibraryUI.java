@@ -49,7 +49,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         detailsButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descriptionTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -82,11 +82,12 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Description", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("text description of workouts");
-        jScrollPane2.setViewportView(jTextArea1);
+        descriptionTextArea.setEditable(false);
+        descriptionTextArea.setColumns(20);
+        descriptionTextArea.setLineWrap(true);
+        descriptionTextArea.setRows(5);
+        descriptionTextArea.setText("text description of workouts");
+        jScrollPane2.setViewportView(descriptionTextArea);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,6 +143,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
         // TODO add your handling code here:
+        descriptionTextArea.setText("Description button was pressed");
     }//GEN-LAST:event_detailsButtonActionPerformed
 
     /**
@@ -187,12 +189,12 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JButton detailsButton;
     private javax.swing.JList<String> exerciseList;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
