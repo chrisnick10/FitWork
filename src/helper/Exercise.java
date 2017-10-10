@@ -12,12 +12,15 @@ package helper;
 public class Exercise {
     private String name;
     private String category;
+    private String subcategory;
     private String description;
     
-    public Exercise(String exerciseName, String exerciseCat, String exerciseDesc) {
+    public Exercise(String exerciseName, String exerciseCat, String exerciseSubCat, String exerciseDesc) {
         name = exerciseName;
         category = exerciseCat;
+        subcategory = exerciseSubCat;
         description = exerciseDesc;
     }
-   
+    
+    
 }
