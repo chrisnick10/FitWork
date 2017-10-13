@@ -5,6 +5,7 @@ import helper.Exercise;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Array;
+import java.util.HashMap;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,6 +21,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     private static final String workoutDataFilePath = "workouts.csv";
     private Exercise[] exerciseArray;
+    private HashMap<String, Exercise> myList  = new HashMap<String, Exercise>();
     
     /**
      * Creates new form WorkoutLibraryUI
@@ -42,9 +44,19 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         String dataRow = csvFile.readLine();
         while (dataRow != null) {
             String[] dataArray = dataRow.split(",");
+            String cat = dataArray[0];
+            String subCat = dataArray[1];
+            String name = dataArray[2];
+            String desc = "";
             
+            for (int i = 3; i < dataArray.length; i++) {
+                desc += dataArray[i];
+            }
             
-            System.out.println();
+            Exercise ex = new Exercise(name, cat, subCat, desc);
+            ex.printExercise();
+            myList.put(name, ex);
+            
             dataRow = csvFile.readLine();
         }
         
