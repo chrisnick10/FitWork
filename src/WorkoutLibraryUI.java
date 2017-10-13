@@ -20,8 +20,8 @@ import java.util.HashMap;
 public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     private static final String workoutDataFilePath = "workouts.csv";
-    private Exercise[] exerciseArray;
-    private HashMap<String, Exercise> myList  = new HashMap<String, Exercise>();
+    
+    private HashMap<String, Exercise> exerciseMap  = new HashMap<String, Exercise>();
     
     /**
      * Creates new form WorkoutLibraryUI
@@ -54,8 +54,9 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             }
             
             Exercise ex = new Exercise(name, cat, subCat, desc);
-            ex.printExercise();
-            myList.put(name, ex);
+            //ex.printExercise();
+            System.out.println(name);
+            exerciseMap.put(name, ex);
             
             dataRow = csvFile.readLine();
         }
@@ -97,7 +98,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         titleLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         exerciseList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Pushups", "Pullups", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Pushups", "Squats", "Shoulder Press", "Plank" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -204,7 +205,8 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     private void exerciseListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_exerciseListValueChanged
         // TODO add your handling code here:
-        descriptionTextArea.setText(exerciseList.getSelectedValue());
+        Exercise ex = exerciseMap.get(exerciseList.getSelectedValue());
+        descriptionTextArea.setText(ex.getDescription());
     }//GEN-LAST:event_exerciseListValueChanged
 
     /**

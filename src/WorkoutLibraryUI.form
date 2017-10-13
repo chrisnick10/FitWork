@@ -98,12 +98,11 @@
         <Component class="javax.swing.JList" name="exerciseList">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
+              <StringArray count="4">
                 <StringItem index="0" value="Pushups"/>
-                <StringItem index="1" value="Pullups"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
+                <StringItem index="1" value="Squats"/>
+                <StringItem index="2" value="Shoulder Press"/>
+                <StringItem index="3" value="Plank"/>
               </StringArray>
             </Property>
             <Property name="selectionMode" type="int" value="0"/>
