@@ -22,6 +22,18 @@ public class Exercise {
         description = exerciseDesc;
     }
     
+    public String getName() {
+        return name;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+    
+    public String getSubcategory() {
+        return subcategory;
+    }
+    
     public String getDescription() {
         return description;
     }
