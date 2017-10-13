@@ -22,5 +22,14 @@ public class Exercise {
         description = exerciseDesc;
     }
     
+    public String getDescription() {
+        return description;
+    }
+    
+    public void printExercise() {
+        System.out.println("Exercise Name: " + name);
+        System.out.println("Category: " + category + ", subcategory: " + subcategory);
+        System.out.println(description);
+    }
     
 }
