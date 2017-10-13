@@ -2,6 +2,8 @@
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import helper.Exercise;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.lang.reflect.Array;
 
 /*
@@ -16,7 +18,7 @@ import java.lang.reflect.Array;
  */
 public class WorkoutLibraryUI extends javax.swing.JFrame {
 
-    private String workoutDataFilePath = "workouts.csv";
+    private static final String workoutDataFilePath = "workouts.csv";
     private Exercise[] exerciseArray;
     
     /**
@@ -26,7 +28,27 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
-        CSVFileReader workoutData = new CSVFileReader(workoutDataFilePath);
+        loadExerciseArray();
+    }
+    
+    /**
+     * 
+     * Loads the list of exercises from the csv file
+     * @throws Exception 
+     */
+    public void loadExerciseArray() throws Exception {
+        BufferedReader csvFile = new BufferedReader(new FileReader(workoutDataFilePath));
+        
+        String dataRow = csvFile.readLine();
+        while (dataRow != null) {
+            String[] dataArray = dataRow.split(",");
+            
+            
+            System.out.println();
+            dataRow = csvFile.readLine();
+        }
+        
+        csvFile.close();
     }
     
     /**
@@ -63,7 +85,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         titleLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         exerciseList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Pushups", "Pullups", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
