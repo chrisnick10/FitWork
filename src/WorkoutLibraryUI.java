@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     private static final String workoutDataFilePath = "workouts.csv";
-    
+    private String[] exerciseNames;
     private HashMap<String, Exercise> exerciseMap  = new HashMap<String, Exercise>();
     
     /**
@@ -30,7 +30,16 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
-        loadExerciseArray();
+        loadExerciseMap();
+        
+        exerciseNames = new String[exerciseMap.size()];
+        int i = 0;
+        for (String key : exerciseMap.keySet()) {
+            exerciseNames[i] = key;
+            i++;
+        }
+        
+        exerciseList.setListData(exerciseNames);
     }
     
     /**
@@ -38,7 +47,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
      * Loads the list of exercises from the csv file
      * @throws Exception 
      */
-    public void loadExerciseArray() throws Exception {
+    public void loadExerciseMap() throws Exception {
         BufferedReader csvFile = new BufferedReader(new FileReader(workoutDataFilePath));
         
         String dataRow = csvFile.readLine();
