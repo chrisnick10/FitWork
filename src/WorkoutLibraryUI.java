@@ -22,7 +22,9 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
     private static final String workoutDataFilePath = "workouts.csv";
     private String[] exerciseNames;
     private HashMap<String, Exercise> exerciseMap  = new HashMap<String, Exercise>();
-    
+    private String[] categoryStrings = {"Strength", "Cardio"};
+    private String[] strengthExercises;
+    private String[] cardioExercises;
     /**
      * Creates new form WorkoutLibraryUI
      */
@@ -31,7 +33,14 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);    //puts the window in the center of the screen
         setVisible(true);               // show the window
         loadExerciseMap();              // load the exercises in the the map
+        loadListData();
         
+    }
+    
+    /**
+     * 
+     */
+    public void loadListData() {
         // initialize an array to store the names of the exercises
         exerciseNames = new String[exerciseMap.size()];
         // iterate through the keys of the exerciseMap and add to the exercise array
@@ -67,8 +76,6 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             desc = desc.substring(2, desc.length()-1);
             
             Exercise ex = new Exercise(name, cat, subCat, desc);
-            //ex.printExercise();
-            System.out.println(name);
             exerciseMap.put(name, ex);
             
             dataRow = csvFile.readLine();
@@ -135,7 +142,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         descriptionTextArea.setColumns(20);
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setRows(5);
-        descriptionTextArea.setText("text description of exercise");
+        descriptionTextArea.setText("Click on an exercise to learn more about it!");
         descriptionTextArea.setWrapStyleWord(true);
         jScrollPane2.setViewportView(descriptionTextArea);
 
