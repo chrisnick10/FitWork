@@ -36,7 +36,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         setVisible(true);               // show the window
         loadExerciseMap();              // load the exercises in the the map
         loadInitialListData();
-        
+        strengthRadioButton.setSelected(true);
     }
     
     /**
@@ -95,7 +95,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             
             Exercise ex = new Exercise(name, cat, subCat, desc);
             exerciseMap.put(name, ex);
-            if (cat.equals("Strength")) {
+            if (cat.equals(categoryStrings[0])) {
                 strengthExercises.add(name);
                 //System.out.println("Added strength exercise: " + name);
             } else {
@@ -267,12 +267,14 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     private void strengthRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strengthRadioButtonActionPerformed
         // TODO add your handling code here:
+        cardioRadioButton.setSelected(false);
         exerciseList.setListData(strengthExercises);
         exerciseList.updateUI();
     }//GEN-LAST:event_strengthRadioButtonActionPerformed
 
     private void cardioRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardioRadioButtonActionPerformed
         // TODO add your handling code here:
+        strengthRadioButton.setSelected(false);
         exerciseList.setListData(cardioExercises);
         exerciseList.updateUI();
     }//GEN-LAST:event_cardioRadioButtonActionPerformed
