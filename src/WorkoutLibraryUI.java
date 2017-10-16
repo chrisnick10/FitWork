@@ -5,7 +5,9 @@ import helper.Exercise;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,11 +22,11 @@ import java.util.HashMap;
 public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     private static final String workoutDataFilePath = "workouts.csv";
-    private String[] exerciseNames;
     private HashMap<String, Exercise> exerciseMap  = new HashMap<String, Exercise>();
     private String[] categoryStrings = {"Strength", "Cardio"};
-    private String[] strengthExercises;
-    private String[] cardioExercises;
+    private String[] exerciseNames;
+    private Vector<String> strengthExercises = new Vector<String>();
+    private Vector<String> cardioExercises = new Vector<String>();
     /**
      * Creates new form WorkoutLibraryUI
      */
@@ -33,24 +35,40 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);    //puts the window in the center of the screen
         setVisible(true);               // show the window
         loadExerciseMap();              // load the exercises in the the map
-        loadListData();
+        loadInitialListData();
         
     }
     
     /**
-     * 
+     * Takes the exercises from the map and loads them into respective vectors
      */
-    public void loadListData() {
+    public void loadInitialListData() {
         // initialize an array to store the names of the exercises
         exerciseNames = new String[exerciseMap.size()];
-        // iterate through the keys of the exerciseMap and add to the exercise array
+        
+        // iterate through the keys of the exerciseMap and add to either 
+        // the strength or cardio categories
         int i = 0;
+        int numOfStrengthExercises = 0;
+        int numOfCardioExercises = 0;
+        
         for (String key : exerciseMap.keySet()) {
             exerciseNames[i] = key;
+           /* 
+            if (exerciseMap.get(key).getCategory().toString() == categoryStrings[0]) {
+                numOfStrengthExercises++;
+                //strengthExercises.add(key);
+                //System.out.println("Strength Exercise Added");
+            } else {
+                numOfCardioExercises++;
+                //cardioExercises.add(key);
+                //System.out.println("Cardio Exercise Added");
+            }
+            */
             i++;
         }
-        // set the list data to the exercise names
-        exerciseList.setListData(exerciseNames);
+        
+        exerciseList.setListData(strengthExercises);
     }
     
     /**
@@ -77,10 +95,16 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             
             Exercise ex = new Exercise(name, cat, subCat, desc);
             exerciseMap.put(name, ex);
+            if (cat.equals("Strength")) {
+                strengthExercises.add(name);
+                //System.out.println("Added strength exercise: " + name);
+            } else {
+                cardioExercises.add(name);
+                //System.out.println("Added cardio exercise: " + name);
+            }
             
             dataRow = csvFile.readLine();
         }
-        
         csvFile.close();
     }
     
@@ -104,8 +128,9 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         descriptionTextArea = new javax.swing.JTextArea();
-        categoryComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        strengthRadioButton = new javax.swing.JRadioButton();
+        cardioRadioButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(490, 450));
@@ -122,6 +147,11 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         exerciseList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        exerciseList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exerciseListMouseClicked(evt);
+            }
+        });
         exerciseList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 exerciseListValueChanged(evt);
@@ -157,14 +187,21 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
         );
 
-        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Strength", "Cardio" }));
-        categoryComboBox.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Pick a category:");
+
+        strengthRadioButton.setText("Strength");
+        strengthRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryComboBoxActionPerformed(evt);
+                strengthRadioButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Pick a category:");
+        cardioRadioButton.setText("Cardio");
+        cardioRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardioRadioButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,11 +215,13 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
                     .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backButton)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(backButton))
+                                .addGap(18, 18, 18)
+                                .addComponent(strengthRadioButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(cardioRadioButton)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -194,12 +233,13 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(strengthRadioButton)
+                    .addComponent(cardioRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(backButton)
                 .addContainerGap())
         );
@@ -215,14 +255,27 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     private void exerciseListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_exerciseListValueChanged
         // TODO add your handling code here:
-        Exercise ex = exerciseMap.get(exerciseList.getSelectedValue());
-        descriptionTextArea.setText(ex.getDescription());
+        //Exercise ex = exerciseMap.get(exerciseList.getSelectedValue());
+        //descriptionTextArea.setText(ex.getDescription());
     }//GEN-LAST:event_exerciseListValueChanged
 
-    private void categoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryComboBoxActionPerformed
+    private void exerciseListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exerciseListMouseClicked
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_categoryComboBoxActionPerformed
+        Exercise ex = exerciseMap.get(exerciseList.getSelectedValue());
+        descriptionTextArea.setText(ex.getDescription());
+    }//GEN-LAST:event_exerciseListMouseClicked
+
+    private void strengthRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strengthRadioButtonActionPerformed
+        // TODO add your handling code here:
+        exerciseList.setListData(strengthExercises);
+        exerciseList.updateUI();
+    }//GEN-LAST:event_strengthRadioButtonActionPerformed
+
+    private void cardioRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardioRadioButtonActionPerformed
+        // TODO add your handling code here:
+        exerciseList.setListData(cardioExercises);
+        exerciseList.updateUI();
+    }//GEN-LAST:event_cardioRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,13 +320,14 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JComboBox<String> categoryComboBox;
+    private javax.swing.JRadioButton cardioRadioButton;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JList<String> exerciseList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton strengthRadioButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
