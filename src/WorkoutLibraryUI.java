@@ -28,29 +28,32 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
      */
     public WorkoutLibraryUI() throws Exception {
         initComponents();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        loadExerciseMap();
+        setLocationRelativeTo(null);    //puts the window in the center of the screen
+        setVisible(true);               // show the window
+        loadExerciseMap();              // load the exercises in the the map
         
+        // initialize an array to store the names of the exercises
         exerciseNames = new String[exerciseMap.size()];
+        // iterate through the keys of the exerciseMap and add to the exercise array
         int i = 0;
         for (String key : exerciseMap.keySet()) {
             exerciseNames[i] = key;
             i++;
         }
-        
+        // set the list data to the exercise names
         exerciseList.setListData(exerciseNames);
     }
     
     /**
      * 
-     * Loads the list of exercises from the csv file
+     * Loads the list of exercises from the csv file into the exercise map
      * @throws Exception 
      */
     public void loadExerciseMap() throws Exception {
         BufferedReader csvFile = new BufferedReader(new FileReader(workoutDataFilePath));
         
         String dataRow = csvFile.readLine();
+        
         while (dataRow != null) {
             String[] dataArray = dataRow.split(",");
             String cat = dataArray[0];
@@ -61,7 +64,6 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             for (int i = 3; i < dataArray.length; i++) {
                 desc += "," + dataArray[i];
             }
-            
             desc = desc.substring(2, desc.length()-1);
             
             Exercise ex = new Exercise(name, cat, subCat, desc);
@@ -92,11 +94,10 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         exerciseList = new javax.swing.JList<>();
         backButton = new javax.swing.JButton();
-        detailsButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         descriptionTextArea = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        categoryComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,13 +129,6 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             }
         });
 
-        detailsButton.setText("Details");
-        detailsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                detailsButtonActionPerformed(evt);
-            }
-        });
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Description", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
 
         descriptionTextArea.setEditable(false);
@@ -156,7 +150,12 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Strength", "Cardio" }));
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Strength", "Cardio" }));
+        categoryComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Pick a category:");
 
@@ -171,14 +170,13 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(detailsButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(backButton))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -189,15 +187,13 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backButton)
-                    .addComponent(detailsButton))
+                .addComponent(backButton)
                 .addContainerGap())
         );
 
@@ -210,16 +206,16 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         new HomeScreenUI();
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        // TODO add your handling code here:
-        descriptionTextArea.setText("Description button was pressed");
-    }//GEN-LAST:event_detailsButtonActionPerformed
-
     private void exerciseListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_exerciseListValueChanged
         // TODO add your handling code here:
         Exercise ex = exerciseMap.get(exerciseList.getSelectedValue());
         descriptionTextArea.setText(ex.getDescription());
     }//GEN-LAST:event_exerciseListValueChanged
+
+    private void categoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryComboBoxActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_categoryComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,10 +260,9 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JComboBox<String> categoryComboBox;
     private javax.swing.JTextArea descriptionTextArea;
-    private javax.swing.JButton detailsButton;
     private javax.swing.JList<String> exerciseList;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
