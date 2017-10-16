@@ -50,6 +50,11 @@ public class HomeScreenUI extends javax.swing.JFrame {
 
         createWorkoutButton.setText("Create Workout");
         createWorkoutButton.setPreferredSize(new java.awt.Dimension(150, 150));
+        createWorkoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createWorkoutButtonActionPerformed(evt);
+            }
+        });
 
         workoutLibraryButton.setText("Workout Library");
         workoutLibraryButton.setName("workoutLibraryButton"); // NOI18N
@@ -68,7 +73,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "FitWork", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "FitWork", 0, 0, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
         jPanel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
 
         jLabel2.setText("A place to create great workouts at home!");
@@ -79,7 +84,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,6 +175,12 @@ public class HomeScreenUI extends javax.swing.JFrame {
     private void myStatsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myStatsButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_myStatsButtonActionPerformed
+
+    private void createWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createWorkoutButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new CreateWorkoutUI();
+    }//GEN-LAST:event_createWorkoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
