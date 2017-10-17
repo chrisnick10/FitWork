@@ -1,3 +1,12 @@
+
+import helper.Exercise;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,14 +19,55 @@
  */
 public class CreateWorkoutUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CreateWorkoutUI
-     */
-    public CreateWorkoutUI() {
+    private static final String workoutDataFilePath = "workouts.csv";
+    private HashMap<String, Exercise> exerciseMap  = new HashMap<String, Exercise>();
+    private Vector<String> exerciseNames = new Vector<String>();
+
+    
+    public CreateWorkoutUI() throws Exception {
         initComponents();
-        setLocationRelativeTo(null);
-        setVisible(true);
+        setLocationRelativeTo(null);    //puts the window in the center of the screen
+        setVisible(true);               // show the window
+        loadExerciseMap();              // load the exercises in the the map
+        loadInitialListData();
+    }
+    
+    public void loadInitialListData() {
+        for ( String item : exerciseMap.keySet()) {
+            exerciseNames.add(item);
+        }
         
+        unselectedExerciseList.setListData(exerciseNames);
+    }
+       
+    public void loadExerciseMap() throws Exception {
+        BufferedReader csvFile = new BufferedReader(new FileReader(workoutDataFilePath));
+        
+        String dataRow = csvFile.readLine(); // read the line
+        
+        // while the data is not null, parse the csv line
+        while (dataRow != null) {
+            String[] dataArray = dataRow.split(",");    // split along the commas
+            String cat = dataArray[0];                  // first field is category
+            String subCat = dataArray[1];               // second field is subcategory
+            String name = dataArray[2];                 // third field is name
+            String desc = "";
+            
+            // this creates the string for the description because if there
+            // were commas in the string it was split up
+            for (int i = 3; i < dataArray.length; i++) {
+                desc += "," + dataArray[i];
+            }
+            // get rid of the parenthesis on either side of the string
+            desc = desc.substring(2, desc.length()-1);
+            
+            // create a new exercise and add to the map
+            Exercise ex = new Exercise(name, cat, subCat, desc);
+            exerciseMap.put(name, ex);
+            
+            dataRow = csvFile.readLine();       // read in the next line
+        }
+        csvFile.close();    // close the file we are done  
     }
 
     /**
@@ -30,9 +80,9 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        unselectedExerciseList = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        selectedExerciseList = new javax.swing.JList<>();
         addExerciseButton = new javax.swing.JButton();
         removeExerciseButton = new javax.swing.JButton();
         startWorkoutButton = new javax.swing.JButton();
@@ -41,19 +91,19 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        unselectedExerciseList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(unselectedExerciseList);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        selectedExerciseList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(selectedExerciseList);
 
         addExerciseButton.setLabel(">>");
 
@@ -157,7 +207,11 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateWorkoutUI().setVisible(true);
+                try {
+                    new CreateWorkoutUI().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(CreateWorkoutUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -165,12 +219,12 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addExerciseButton;
     private javax.swing.JButton backButton;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton removeExerciseButton;
+    private javax.swing.JList<String> selectedExerciseList;
     private javax.swing.JButton startWorkoutButton;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JList<String> unselectedExerciseList;
     // End of variables declaration//GEN-END:variables
 }
