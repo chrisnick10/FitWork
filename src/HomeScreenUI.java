@@ -179,7 +179,11 @@ public class HomeScreenUI extends javax.swing.JFrame {
     private void createWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createWorkoutButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-        new CreateWorkoutUI();
+        try {
+            new CreateWorkoutUI();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeScreenUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_createWorkoutButtonActionPerformed
 
     /**
