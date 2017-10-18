@@ -115,6 +115,11 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         });
 
         removeExerciseButton.setLabel("<<");
+        removeExerciseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeExerciseButtonActionPerformed(evt);
+            }
+        });
 
         startWorkoutButton.setLabel("Start Workout");
 
@@ -193,6 +198,16 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         unselectedExerciseList.updateUI();
         selectedExerciseList.updateUI();
     }//GEN-LAST:event_addExerciseButtonActionPerformed
+
+    private void removeExerciseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeExerciseButtonActionPerformed
+        // TODO add your handling code here:
+        String exercise = selectedExerciseList.getSelectedValue();
+        unselectedExerciseNames.add(exercise);
+        selectedExerciseNames.remove(exercise);
+        
+        selectedExerciseList.updateUI();
+        unselectedExerciseList.updateUI();
+    }//GEN-LAST:event_removeExerciseButtonActionPerformed
 
     /**
      * @param args the command line arguments
