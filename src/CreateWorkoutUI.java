@@ -21,8 +21,9 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
 
     private static final String workoutDataFilePath = "workouts.csv";
     private HashMap<String, Exercise> exerciseMap  = new HashMap<String, Exercise>();
-    private Vector<String> exerciseNames = new Vector<String>();
-
+    private Vector<String> unselectedExerciseNames = new Vector<String>();
+    private Vector<String> selectedExerciseNames = new Vector<String>();
+    
     
     public CreateWorkoutUI() throws Exception {
         initComponents();
@@ -34,12 +35,13 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     
     public void loadInitialListData() {
         for ( String item : exerciseMap.keySet()) {
-            exerciseNames.add(item);
+            unselectedExerciseNames.add(item);
         }
         
-        unselectedExerciseList.setListData(exerciseNames);
+        unselectedExerciseList.setListData(unselectedExerciseNames);
+        selectedExerciseList.setListData(selectedExerciseNames);
     }
-       
+    
     public void loadExerciseMap() throws Exception {
         BufferedReader csvFile = new BufferedReader(new FileReader(workoutDataFilePath));
         
@@ -106,6 +108,11 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(selectedExerciseList);
 
         addExerciseButton.setLabel(">>");
+        addExerciseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addExerciseButtonActionPerformed(evt);
+            }
+        });
 
         removeExerciseButton.setLabel("<<");
 
@@ -176,6 +183,16 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         dispose();
         new HomeScreenUI();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void addExerciseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExerciseButtonActionPerformed
+        // TODO add your handling code here:
+        String exercise = unselectedExerciseList.getSelectedValue();
+        selectedExerciseNames.add(exercise);
+        unselectedExerciseNames.remove(exercise);
+        
+        unselectedExerciseList.updateUI();
+        selectedExerciseList.updateUI();
+    }//GEN-LAST:event_addExerciseButtonActionPerformed
 
     /**
      * @param args the command line arguments
