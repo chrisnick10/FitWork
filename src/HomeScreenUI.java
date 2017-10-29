@@ -44,14 +44,21 @@ public class HomeScreenUI extends javax.swing.JFrame {
         setTitle("FitWork");
         setResizable(false);
 
-        titleLabel.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        titleLabel.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 48)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(106, 185, 231));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("FitWork");
 
-        createWorkoutButton.setText("Create Workout");
+        createWorkoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/App Icon - 180x180.png"))); // NOI18N
         createWorkoutButton.setPreferredSize(new java.awt.Dimension(150, 150));
+        createWorkoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createWorkoutButtonActionPerformed(evt);
+            }
+        });
 
-        workoutLibraryButton.setText("Workout Library");
+        workoutLibraryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/Lib Icon - 180x180.png"))); // NOI18N
+        workoutLibraryButton.setToolTipText("");
         workoutLibraryButton.setName("workoutLibraryButton"); // NOI18N
         workoutLibraryButton.setPreferredSize(new java.awt.Dimension(150, 150));
         workoutLibraryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +67,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
             }
         });
 
-        myStatsButton.setText("My Stats");
+        myStatsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/Stats Icon - 180x180.png"))); // NOI18N
         myStatsButton.setPreferredSize(new java.awt.Dimension(150, 150));
         myStatsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,14 +86,14 @@ public class HomeScreenUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -105,12 +112,12 @@ public class HomeScreenUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(createWorkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myStatsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(myStatsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(createWorkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(workoutLibraryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -118,7 +125,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(exitButton)
-                .addGap(260, 260, 260))
+                .addGap(239, 239, 239))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {createWorkoutButton, jPanel1, myStatsButton, workoutLibraryButton});
@@ -129,33 +136,28 @@ public class HomeScreenUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createWorkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(workoutLibraryButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(myStatsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                    .addComponent(workoutLibraryButton, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(createWorkoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myStatsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(exitButton)
-                .addContainerGap())
+                .addGap(7, 7, 7))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void workoutLibraryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workoutLibraryButtonActionPerformed
-        // TODO add your handling code here:
-        String cmd = evt.getActionCommand();
-         if (cmd.equals("Workout Library")) {
-             System.out.println("Workout Library button pressed.");
-             dispose();
-            try {
-                new WorkoutLibraryUI();
-            } catch (Exception ex) {
-                Logger.getLogger(HomeScreenUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-         }
+    dispose();
+    try {
+        new WorkoutLibraryUI();
+    } catch (Exception ex) {
+            Logger.getLogger(HomeScreenUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_workoutLibraryButtonActionPerformed
 
     /**
@@ -170,6 +172,16 @@ public class HomeScreenUI extends javax.swing.JFrame {
     private void myStatsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myStatsButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_myStatsButtonActionPerformed
+
+    private void createWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createWorkoutButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        try {
+            new CreateWorkoutUI();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeScreenUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_createWorkoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
