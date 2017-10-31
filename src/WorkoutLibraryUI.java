@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -112,6 +113,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         categoryLabel = new javax.swing.JLabel();
         strengthRadioButton = new javax.swing.JRadioButton();
         cardioRadioButton = new javax.swing.JRadioButton();
+        helpButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(490, 450));
@@ -179,6 +181,13 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
             }
         });
 
+        helpButton.setText("Help");
+        helpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,15 +199,16 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(backButton)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(categoryLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(strengthRadioButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(cardioRadioButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(categoryLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(strengthRadioButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(cardioRadioButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(helpButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -216,7 +226,9 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(backButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backButton)
+                    .addComponent(helpButton))
                 .addContainerGap())
         );
 
@@ -271,6 +283,12 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
         descriptionTextArea.setText("Click on a cardio exercise to learn more about it!");
     }//GEN-LAST:event_cardioRadioButtonActionPerformed
 
+    private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
+        // TODO add your handling code here:
+        
+        JOptionPane.showMessageDialog(null, "Instructions", "Help", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_helpButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,6 +336,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
     private javax.swing.JLabel categoryLabel;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JList<String> exerciseList;
+    private javax.swing.JButton helpButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
