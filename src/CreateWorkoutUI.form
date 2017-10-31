@@ -60,6 +60,9 @@
       <Properties>
         <Property name="label" type="java.lang.String" value="Start Workout"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startWorkoutButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="titleLabel">
       <Properties>

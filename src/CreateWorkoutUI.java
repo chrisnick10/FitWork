@@ -98,6 +98,11 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         setResizable(false);
 
         startWorkoutButton.setLabel("Start Workout");
+        startWorkoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startWorkoutButtonActionPerformed(evt);
+            }
+        });
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -222,7 +227,7 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addExerciseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExerciseButtonActionPerformed
-        // TODO add your handling code here:
+        
         String exercise = unselectedExerciseList.getSelectedValue();
         selectedExerciseNames.add(exercise);
         unselectedExerciseNames.remove(exercise);
@@ -232,7 +237,7 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addExerciseButtonActionPerformed
 
     private void removeExerciseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeExerciseButtonActionPerformed
-        // TODO add your handling code here:
+        
         String exercise = selectedExerciseList.getSelectedValue();
         unselectedExerciseNames.add(exercise);
         selectedExerciseNames.remove(exercise);
@@ -240,6 +245,14 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         selectedExerciseList.updateUI();
         unselectedExerciseList.updateUI();
     }//GEN-LAST:event_removeExerciseButtonActionPerformed
+
+    private void startWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startWorkoutButtonActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        StartWorkoutUI workoutUI = new StartWorkoutUI();
+        workoutUI.setExerciseNames(selectedExerciseNames);
+        workoutUI.setVisible(true);
+    }//GEN-LAST:event_startWorkoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
