@@ -1,5 +1,11 @@
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -53,7 +59,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         addSetButton = new javax.swing.JButton();
         setNumberLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        saveWorkoutButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         summaryTextArea = new javax.swing.JTextArea();
@@ -135,7 +141,12 @@ public class StartWorkoutUI extends javax.swing.JFrame {
 
         jButton1.setText("Cancel");
 
-        jButton3.setText("Save Workout");
+        saveWorkoutButton.setText("Save Workout");
+        saveWorkoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveWorkoutButtonActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Workout Summary"));
 
@@ -182,7 +193,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(helpButton)
                         .addGap(26, 26, 26)
-                        .addComponent(jButton3))
+                        .addComponent(saveWorkoutButton))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -200,7 +211,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton3)
+                    .addComponent(saveWorkoutButton)
                     .addComponent(helpButton))
                 .addContainerGap())
         );
@@ -229,10 +240,23 @@ public class StartWorkoutUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addSetButtonActionPerformed
 
     private void exerciseListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_exerciseListValueChanged
-        // TODO add your handling code here:
-        
         setNumberLabel.setText("1");
     }//GEN-LAST:event_exerciseListValueChanged
+
+    private void saveWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveWorkoutButtonActionPerformed
+        String workoutName = JOptionPane.showInputDialog("Enter a workout name:");
+        
+        String workoutFilePath = "workouts/" + workoutName + ".txt";
+        File workoutFile = new File(workoutFilePath);
+        
+        try {
+            PrintWriter writer = new PrintWriter(workoutFile);
+            writer.print(summaryTextArea.getText());
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StartWorkoutUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_saveWorkoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,7 +298,6 @@ public class StartWorkoutUI extends javax.swing.JFrame {
     private javax.swing.JList<String> exerciseList;
     private javax.swing.JButton helpButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -283,6 +306,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField repTextField;
+    private javax.swing.JButton saveWorkoutButton;
     private javax.swing.JLabel setLabel;
     private javax.swing.JLabel setNumberLabel;
     private javax.swing.JTextArea summaryTextArea;
