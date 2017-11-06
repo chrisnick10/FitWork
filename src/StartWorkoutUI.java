@@ -58,7 +58,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         repTextField = new javax.swing.JTextField();
         addSetButton = new javax.swing.JButton();
         setNumberLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         saveWorkoutButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -139,7 +139,12 @@ public class StartWorkoutUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("Cancel");
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         saveWorkoutButton.setText("Save Workout");
         saveWorkoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +194,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(helpButton)
                         .addGap(26, 26, 26)
@@ -210,7 +215,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(cancelButton)
                     .addComponent(saveWorkoutButton)
                     .addComponent(helpButton))
                 .addContainerGap())
@@ -253,10 +258,20 @@ public class StartWorkoutUI extends javax.swing.JFrame {
             PrintWriter writer = new PrintWriter(workoutFile);
             writer.print(summaryTextArea.getText());
             writer.close();
+            dispose();
+            JOptionPane.showMessageDialog(null, "Workout Successfully saved");
+            new HomeScreenUI();
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(StartWorkoutUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_saveWorkoutButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        
+        dispose();
+        new HomeScreenUI();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,9 +310,9 @@ public class StartWorkoutUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addSetButton;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JList<String> exerciseList;
     private javax.swing.JButton helpButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
