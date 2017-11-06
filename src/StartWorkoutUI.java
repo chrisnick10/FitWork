@@ -51,6 +51,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         repTextField = new javax.swing.JTextField();
         addSetButton = new javax.swing.JButton();
+        setNumberLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -71,17 +72,29 @@ public class StartWorkoutUI extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         exerciseList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        exerciseList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                exerciseListValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(exerciseList);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Exercise Info"));
 
-        setLabel.setText("Set #1");
+        setLabel.setText("Set:");
 
         jLabel3.setText("# of repetitions:");
 
         repTextField.setText("0");
 
         addSetButton.setText("Add");
+        addSetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSetButtonActionPerformed(evt);
+            }
+        });
+
+        setNumberLabel.setText("1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,11 +103,14 @@ public class StartWorkoutUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(setLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(setLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(setNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(repTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 339, Short.MAX_VALUE)
                 .addComponent(addSetButton)
                 .addContainerGap())
         );
@@ -104,7 +120,9 @@ public class StartWorkoutUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(setLabel)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(setLabel)
+                            .addComponent(setNumberLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -191,10 +209,30 @@ public class StartWorkoutUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        // TODO add your handling code here:
-        
         JOptionPane.showMessageDialog(null, "Instructions", "Help", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_helpButtonActionPerformed
+
+    private void addSetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSetButtonActionPerformed
+        // TODO add your handling code here:
+        String exName = exerciseList.getSelectedValue();
+        String setNumber = setNumberLabel.getText();
+        String repNumber = repTextField.getText();
+        
+        String newExercise = exName + ", " + setNumber + ", " + repNumber + "\n";
+        String summary = summaryTextArea.getText();
+        summaryTextArea.setText(summary + newExercise);
+        
+        int setNum = Integer.parseInt(setNumber);
+        setNum++;
+        setNumberLabel.setText(String.valueOf(setNum));
+       
+    }//GEN-LAST:event_addSetButtonActionPerformed
+
+    private void exerciseListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_exerciseListValueChanged
+        // TODO add your handling code here:
+        
+        setNumberLabel.setText("1");
+    }//GEN-LAST:event_exerciseListValueChanged
 
     /**
      * @param args the command line arguments
@@ -246,6 +284,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField repTextField;
     private javax.swing.JLabel setLabel;
+    private javax.swing.JLabel setNumberLabel;
     private javax.swing.JTextArea summaryTextArea;
     // End of variables declaration//GEN-END:variables
 }
