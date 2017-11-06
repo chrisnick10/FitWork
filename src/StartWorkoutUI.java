@@ -250,8 +250,14 @@ public class StartWorkoutUI extends javax.swing.JFrame {
 
     private void saveWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveWorkoutButtonActionPerformed
         String workoutName = JOptionPane.showInputDialog("Enter a workout name:");
-        
-        String workoutFilePath = "workouts/" + workoutName + ".txt";
+        String workoutFolderPath = System.getProperty("user.dir") + "/workouts";
+        File workoutFolder = new File(workoutFolderPath);
+        if (workoutFolder.exists()) {
+            System.out.println("workout folder exists");
+        } else {
+            workoutFolder.mkdir();
+        }
+        String workoutFilePath = System.getProperty("user.dir") + "/workouts/" + workoutName + ".txt";
         File workoutFile = new File(workoutFilePath);
         
         try {
