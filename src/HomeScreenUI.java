@@ -153,10 +153,10 @@ public class HomeScreenUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void workoutLibraryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workoutLibraryButtonActionPerformed
-    dispose();
-    try {
-        new WorkoutLibraryUI();
-    } catch (Exception ex) {
+        dispose();
+        try {
+            new WorkoutLibraryUI();
+        } catch (Exception ex) {
             Logger.getLogger(HomeScreenUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_workoutLibraryButtonActionPerformed
@@ -172,6 +172,12 @@ public class HomeScreenUI extends javax.swing.JFrame {
 
     private void myStatsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myStatsButtonActionPerformed
         // TODO add your handling code here:
+        dispose();
+        try {
+            new MyStatsUI();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeScreenUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_myStatsButtonActionPerformed
 
     private void createWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createWorkoutButtonActionPerformed
