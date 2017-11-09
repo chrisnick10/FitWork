@@ -274,7 +274,6 @@ public class StartWorkoutUI extends javax.swing.JFrame {
     }//GEN-LAST:event_saveWorkoutButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        
         dispose();
         new HomeScreenUI();
     }//GEN-LAST:event_cancelButtonActionPerformed
