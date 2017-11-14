@@ -58,7 +58,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
             }
         });
 
-        workoutLibraryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/Lib Icon - 180x180.png"))); // NOI18N
+        workoutLibraryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/App Icon - 180x180_1.png"))); // NOI18N
         workoutLibraryButton.setToolTipText("");
         workoutLibraryButton.setName("workoutLibraryButton"); // NOI18N
         workoutLibraryButton.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -113,7 +113,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(createWorkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
