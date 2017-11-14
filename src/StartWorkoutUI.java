@@ -1,8 +1,12 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -252,11 +256,35 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         String workoutName = JOptionPane.showInputDialog("Enter a workout name:");
         String workoutFolderPath = System.getProperty("user.dir") + "/workouts";
         File workoutFolder = new File(workoutFolderPath);
+        
+        // look for workout folder
         if (workoutFolder.exists()) {
             System.out.println("workout folder exists");
         } else {
             workoutFolder.mkdir();
         }
+        
+        // look for workout name list
+        String workoutListFilePath = System.getProperty("user.dir") + "/workouts/workoutListFile.txt";
+        File workoutListFile = new File(workoutListFilePath);
+        // if the workoutListFile
+        if (!workoutListFile.exists()) {
+            try {
+                PrintWriter writer = new PrintWriter(workoutListFile);
+                writer.print(workoutName);
+                writer.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(StartWorkoutUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                Files.write(Paths.get(workoutListFilePath), workoutName.getBytes(), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                //exception handling left as an exercise for the reader
+            } 
+
+        }
+            
         String workoutFilePath = System.getProperty("user.dir") + "/workouts/" + workoutName + ".txt";
         File workoutFile = new File(workoutFilePath);
         

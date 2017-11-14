@@ -23,7 +23,6 @@ public class MyStatsUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
-        
     }
 
     /**
