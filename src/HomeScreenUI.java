@@ -50,7 +50,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("FitWork");
 
-        createWorkoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/App Icon - 180x180.png"))); // NOI18N
+        createWorkoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/CreateAWorkout.png"))); // NOI18N
         createWorkoutButton.setPreferredSize(new java.awt.Dimension(150, 150));
         createWorkoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,7 +58,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
             }
         });
 
-        workoutLibraryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/App Icon - 180x180_1.png"))); // NOI18N
+        workoutLibraryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources.images/App Icon - 180x180.png"))); // NOI18N
         workoutLibraryButton.setToolTipText("");
         workoutLibraryButton.setName("workoutLibraryButton"); // NOI18N
         workoutLibraryButton.setPreferredSize(new java.awt.Dimension(150, 150));
