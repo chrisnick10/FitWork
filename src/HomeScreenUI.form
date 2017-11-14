@@ -31,7 +31,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="titleLabel" pref="528" max="32767" attributes="0"/>
+                  <Component id="titleLabel" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="createWorkoutButton" linkSize="1" min="-2" pref="245" max="-2" attributes="0"/>
@@ -104,7 +104,7 @@
     <Component class="javax.swing.JButton" name="workoutLibraryButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/resources.images/Lib Icon - 180x180.png"/>
+          <Image iconType="3" name="/resources.images/App Icon - 180x180_1.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="workoutLibraryButton" noResource="true"/>
