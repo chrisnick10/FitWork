@@ -13,16 +13,25 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import java.util.Vector;
 
 public class MyStatsUI extends javax.swing.JFrame {
-
+    
+    // holds the list of workout names
+    private Vector<String> workoutNameArray = new Vector<String>();
+    
     /**
      * Creates new form MyStatsUI
      */
     public MyStatsUI() {
         initComponents();
         setLocationRelativeTo(null);
+        loadWorkoutNamesList();
         setVisible(true);
+    }
+    
+    private void loadWorkoutNamesList() {
+        
     }
 
     /**
