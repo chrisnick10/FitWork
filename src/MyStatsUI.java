@@ -14,6 +14,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MyStatsUI extends javax.swing.JFrame {
     
@@ -23,15 +25,31 @@ public class MyStatsUI extends javax.swing.JFrame {
     /**
      * Creates new form MyStatsUI
      */
-    public MyStatsUI() {
+    public MyStatsUI() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
         loadWorkoutNamesList();
         setVisible(true);
     }
     
-    private void loadWorkoutNamesList() {
+    private void loadWorkoutNamesList() throws Exception {
+        // look for workout name list
+        String workoutListFilePath = System.getProperty("user.dir") + "/workouts/workoutListFile.txt";
+        File workoutListFile = new File(workoutListFilePath);
         
+        if (workoutListFile.exists()) {
+            BufferedReader workoutNameReader = new BufferedReader(new FileReader(workoutListFilePath));
+            String workoutName = workoutNameReader.readLine();
+            
+            while (workoutName != null) {
+                workoutNameArray.add(workoutName);
+                workoutName = workoutNameReader.readLine();
+            }
+            
+            workoutNameReader.close();
+        }
+        
+        workoutNameList.setListData(workoutNameArray);
     }
 
     /**
@@ -49,7 +67,7 @@ public class MyStatsUI extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         selectWorkoutButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        workoutNameList = new javax.swing.JList<>();
         titleLabel = new javax.swing.JLabel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -77,12 +95,12 @@ public class MyStatsUI extends javax.swing.JFrame {
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        workoutNameList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList2);
+        jScrollPane3.setViewportView(workoutNameList);
 
         titleLabel.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -177,7 +195,11 @@ public class MyStatsUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MyStatsUI().setVisible(true);
+                try {
+                    new MyStatsUI().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(MyStatsUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });      
     }
@@ -188,11 +210,11 @@ public class MyStatsUI extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton selectWorkoutButton;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JList<String> workoutNameList;
     // End of variables declaration//GEN-END:variables
 
 }
