@@ -1,3 +1,7 @@
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,6 +26,7 @@ public class MyStatsPageUI extends javax.swing.JFrame {
 
     public void setWorkoutName(String name) {
         workoutName = name;
+        workoutNameLabel.setText(workoutName);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +64,11 @@ public class MyStatsPageUI extends javax.swing.JFrame {
         jButton2.setText("Help");
 
         backButton.setText("<< Go Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Workout Name:");
 
@@ -127,6 +137,16 @@ public class MyStatsPageUI extends javax.swing.JFrame {
         dispose();
         new HomeScreenUI();
     }//GEN-LAST:event_doneButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        try {
+            new MyStatsUI();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeScreenUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments

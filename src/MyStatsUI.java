@@ -161,6 +161,7 @@ public class MyStatsUI extends javax.swing.JFrame {
         MyStatsPageUI statsPage = new MyStatsPageUI();
         statsPage.setWorkoutName(selectedWorkout);
         statsPage.setVisible(true);
+        dispose();
     }//GEN-LAST:event_selectWorkoutButtonActionPerformed
 
     /**
