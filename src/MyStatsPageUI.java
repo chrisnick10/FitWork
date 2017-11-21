@@ -31,7 +31,6 @@ public class MyStatsPageUI extends javax.swing.JFrame {
         workoutName = name;
         workoutNameLabel.setText(workoutName);
         workoutFilePath = System.getProperty("user.dir") + "/workouts/" + workoutName + ".txt";
-        
     }
     
     public void loadWorkout() {
