@@ -271,7 +271,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         if (!workoutListFile.exists()) {
             try {
                 PrintWriter writer = new PrintWriter(workoutListFile);
-                writer.print(workoutName);
+                writer.print(workoutName + "\n");
                 writer.close();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(StartWorkoutUI.class.getName()).log(Level.SEVERE, null, ex);
