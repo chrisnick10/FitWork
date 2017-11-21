@@ -81,7 +81,7 @@ public class MyStatsUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        backButton.setText("<< GO BACK");
+        backButton.setText("<< Go Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -155,8 +155,12 @@ public class MyStatsUI extends javax.swing.JFrame {
 
     private void selectWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectWorkoutButtonActionPerformed
         // TODO add your handling code here:
-     
+        String selectedWorkout = workoutNameList.getSelectedValue();
         
+        setVisible(false);
+        MyStatsPageUI statsPage = new MyStatsPageUI();
+        statsPage.setWorkoutName(selectedWorkout);
+        statsPage.setVisible(true);
     }//GEN-LAST:event_selectWorkoutButtonActionPerformed
 
     /**
