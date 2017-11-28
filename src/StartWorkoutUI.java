@@ -282,7 +282,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         String setNumber = setNumberLabel.getText();
         String repNumber = repTextField.getText();
         
-        String newExercise = exName + ", " + catName + ", "+ setNumber + ", " + repNumber + "\n";
+        String newExercise = exName + "," + catName + ", "+ setNumber + ", " + repNumber + "\n";
         String summary = summaryTextArea.getText();
         summaryTextArea.setText(summary + newExercise);
         

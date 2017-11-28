@@ -21,6 +21,8 @@ public class MyStatsUI extends javax.swing.JFrame {
     
     // holds the list of workout names
     private Vector<String> workoutNameArray = new Vector<String>();
+    private int strengthCount = 0;
+    private int cardioCount = 0;
     
     /**
      * Creates new form MyStatsUI
@@ -154,9 +156,42 @@ public class MyStatsUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void selectWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectWorkoutButtonActionPerformed
-        // TODO add your handling code here:
         String selectedWorkout = workoutNameList.getSelectedValue();
         
+        String selectedWorkoutFilePath = System.getProperty("user.dir") + "/workouts/" + selectedWorkout + ".txt";
+        
+        File selectedWorkoutFile = new File(selectedWorkoutFilePath);
+        
+        try {
+            BufferedReader selectedWorkoutFileReader = new BufferedReader(new FileReader(selectedWorkoutFilePath));
+            String dataRow = selectedWorkoutFileReader.readLine();
+            
+            while (dataRow != null) {
+                String[] dataArray = dataRow.split(",");    // split along the commas
+                String exCat = dataArray[1];
+                System.out.println("Category found:" + exCat);
+                
+                if (exCat.equals("Strength")) {
+                    strengthCount++;
+                } else if (exCat.equals("Cardio")) {
+                    cardioCount++;
+                }
+                
+                dataRow = selectedWorkoutFileReader.readLine();
+            }
+            
+            selectedWorkoutFileReader.close();
+            
+            System.out.println("Number of cardio: " + cardioCount);
+            System.out.println("Number of strength: " + strengthCount);
+            
+            // Insert code for pie chart here
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MyStatsUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MyStatsUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_selectWorkoutButtonActionPerformed
 
