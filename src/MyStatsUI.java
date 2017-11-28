@@ -16,13 +16,21 @@ import java.io.*;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class MyStatsUI extends javax.swing.JFrame {
     
     // holds the list of workout names
     private Vector<String> workoutNameArray = new Vector<String>();
-    private int strengthCount = 0;
-    private int cardioCount = 0;
+    private double strengthCount = 0;
+    private  double cardioCount = 0;
+    private double x;
+    private double y;
+    private double total = 1;
     
     /**
      * Creates new form MyStatsUI
@@ -184,6 +192,9 @@ public class MyStatsUI extends javax.swing.JFrame {
             
             System.out.println("Number of cardio: " + cardioCount);
             System.out.println("Number of strength: " + strengthCount);
+            total = cardioCount + strengthCount;
+            x = ((cardioCount / total) * 100);
+            y = ((strengthCount / total) * 100);
             
             // Insert code for pie chart here
             
@@ -192,6 +203,18 @@ public class MyStatsUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MyStatsUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //piechart
+        
+       
+        DefaultPieDataset pieDataset = new DefaultPieDataset();
+        pieDataset.setValue("Cardio", new Integer((int) x));
+        pieDataset.setValue("Strength", new Integer((int) y));
+        JFreeChart chart= ChartFactory.createPieChart(selectedWorkout, pieDataset, true, true, true);
+        PiePlot P = (PiePlot)chart.getPlot();
+        ChartFrame frame = new ChartFrame(selectedWorkout,chart);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null); 
+        frame.setSize(450,500);
         
     }//GEN-LAST:event_selectWorkoutButtonActionPerformed
 
