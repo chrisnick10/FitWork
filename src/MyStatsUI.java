@@ -157,11 +157,7 @@ public class MyStatsUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selectedWorkout = workoutNameList.getSelectedValue();
         
-        setVisible(false);
-        MyStatsPageUI statsPage = new MyStatsPageUI();
-        statsPage.setWorkoutName(selectedWorkout);
-        statsPage.setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_selectWorkoutButtonActionPerformed
 
     /**
