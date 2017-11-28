@@ -102,7 +102,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="backButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;&lt; GO BACK"/>
+        <Property name="text" type="java.lang.String" value="&lt;&lt; Go Back"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
@@ -123,7 +123,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList2">
+        <Component class="javax.swing.JList" name="workoutNameList">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">

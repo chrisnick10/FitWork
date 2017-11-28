@@ -121,7 +121,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
 
         titleLabel.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Workout Library");
+        titleLabel.setText("Exercise Library");
         titleLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         exerciseList.setModel(new javax.swing.AbstractListModel<String>() {

@@ -262,9 +262,15 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     private void startWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startWorkoutButtonActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        StartWorkoutUI workoutUI = new StartWorkoutUI();
-        workoutUI.setExerciseNames(selectedExerciseNames);
-        workoutUI.setVisible(true);
+        StartWorkoutUI workoutUI;
+        try {
+            workoutUI = new StartWorkoutUI();
+            workoutUI.setExerciseNames(selectedExerciseNames);
+            workoutUI.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(CreateWorkoutUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_startWorkoutButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
