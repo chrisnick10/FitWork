@@ -1,12 +1,16 @@
 
+import helper.Exercise;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,18 +28,56 @@ import javax.swing.JOptionPane;
  */
 public class StartWorkoutUI extends javax.swing.JFrame {
 
+    private static final String workoutDataFilePath = "workouts.csv";
+    private HashMap<String, Exercise> exerciseMap  = new HashMap<String, Exercise>();
     private Vector<String> selectedExerciseNames = new Vector<String>();
     /**
      * Creates new form StartWorkoutUI
      */
-    public StartWorkoutUI() {
+    public StartWorkoutUI() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
-        
+        loadExerciseMap();              // load the exercises in the the map
     }
     
-    public StartWorkoutUI(Vector<String> exNames) {
+    public void loadExerciseMap() throws Exception {
+        BufferedReader csvFile = new BufferedReader(new FileReader(workoutDataFilePath));
         
+        String dataRow = csvFile.readLine(); // read the line
+        
+        // while the data is not null, parse the csv line
+        while (dataRow != null) {
+            String[] dataArray = dataRow.split(",");    // split along the commas
+            String cat = dataArray[0];                  // first field is category
+            String subCat = dataArray[1];               // second field is subcategory
+            String name = dataArray[2];                 // third field is name
+            String desc = "";
+            
+            // this creates the string for the description because if there
+            // were commas in the string it was split up
+            for (int i = 3; i < dataArray.length; i++) {
+                desc += "," + dataArray[i];
+            }
+            // get rid of the parenthesis on either side of the string
+            desc = desc.substring(2, desc.length()-1);
+            
+            // create a new exercise and add to the map
+            Exercise ex = new Exercise(name, cat, subCat, desc);
+            exerciseMap.put(name, ex);
+            
+            // check if the category is either strength or cardio
+            /*
+            if (cat.equals(categoryStrings[0])) {
+                strengthExercises.add(name);
+                
+            } else {
+                cardioExercises.add(name);
+            }
+            */
+            
+            dataRow = csvFile.readLine();       // read in the next line
+        }
+        csvFile.close();    // close the file we are done
     }
 
     public void setExerciseNames(Vector<String> exNames) {
@@ -234,11 +276,13 @@ public class StartWorkoutUI extends javax.swing.JFrame {
 
     private void addSetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSetButtonActionPerformed
         // TODO add your handling code here:
+        
         String exName = exerciseList.getSelectedValue();
+        String catName = exerciseMap.get(exName).getCategory();
         String setNumber = setNumberLabel.getText();
         String repNumber = repTextField.getText();
         
-        String newExercise = exName + ", " + setNumber + ", " + repNumber + "\n";
+        String newExercise = exName + ", " + catName + ", "+ setNumber + ", " + repNumber + "\n";
         String summary = summaryTextArea.getText();
         summaryTextArea.setText(summary + newExercise);
         
@@ -267,11 +311,11 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         // look for workout name list
         String workoutListFilePath = System.getProperty("user.dir") + "/workouts/workoutListFile.txt";
         File workoutListFile = new File(workoutListFilePath);
-        // if the workoutListFile
+        // if the workoutListFile exists, then append a line with the workout name to it
         if (!workoutListFile.exists()) {
             try {
                 PrintWriter writer = new PrintWriter(workoutListFile);
-                writer.print(workoutName + "\n");
+                writer.println(workoutName);
                 writer.close();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(StartWorkoutUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -336,7 +380,11 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StartWorkoutUI().setVisible(true);
+                try {
+                    new StartWorkoutUI().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(StartWorkoutUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
