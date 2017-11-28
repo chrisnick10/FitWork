@@ -1,9 +1,11 @@
 
 import helper.Exercise;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -322,7 +324,14 @@ public class StartWorkoutUI extends javax.swing.JFrame {
             }
         } else {
             try {
-                Files.write(Paths.get(workoutListFilePath), workoutName.getBytes(), StandardOpenOption.APPEND);
+                FileWriter fw = new FileWriter(workoutListFile.getAbsolutePath(), true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                
+                bw.write(workoutName + "\n");
+                
+                bw.close();
+                fw.close();
+                //Files.write(Paths.get(workoutListFilePath), workoutName.getBytes(), StandardOpenOption.APPEND);
             } catch (IOException e) {
                 //exception handling left as an exercise for the reader
             } 
