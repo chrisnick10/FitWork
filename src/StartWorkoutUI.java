@@ -1,5 +1,6 @@
 
 import helper.Exercise;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,6 +40,7 @@ public class StartWorkoutUI extends javax.swing.JFrame {
     public StartWorkoutUI() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(63, 169, 245));
         loadExerciseMap();              // load the exercises in the the map
     }
     

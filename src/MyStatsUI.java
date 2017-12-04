@@ -20,7 +20,9 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.ui.RectangleEdge;
 
 public class MyStatsUI extends javax.swing.JFrame {
     
@@ -39,6 +41,7 @@ public class MyStatsUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadWorkoutNamesList();
+        getContentPane().setBackground(new Color(63, 169, 245));
         setVisible(true);
     }
     
@@ -212,6 +215,22 @@ public class MyStatsUI extends javax.swing.JFrame {
         JFreeChart chart= ChartFactory.createPieChart(selectedWorkout, pieDataset, true, true, true);
         PiePlot P = (PiePlot)chart.getPlot();
         ChartFrame frame = new ChartFrame(selectedWorkout,chart);
+        
+        
+  
+        if (cardioCount > strengthCount){
+                TextTitle legendText = new TextTitle("YOU NEED TO DO MORE STRENGTH!");
+                legendText.setPosition(RectangleEdge.BOTTOM);
+                chart.addSubtitle(legendText);}
+        if (cardioCount < strengthCount){
+                TextTitle legendText = new TextTitle("YOU NEED TO DO MORE CARDIO!");
+                legendText.setPosition(RectangleEdge.BOTTOM);
+                chart.addSubtitle(legendText);}
+        if (cardioCount == strengthCount){
+                TextTitle legendText = new TextTitle("YOUR WORKOUT IS BALANCED");
+                legendText.setPosition(RectangleEdge.BOTTOM);
+                chart.addSubtitle(legendText);}
+        
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); 
         frame.setSize(450,500);

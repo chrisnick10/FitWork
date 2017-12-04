@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +21,7 @@ public class HomeScreenUI extends javax.swing.JFrame {
     public HomeScreenUI() {
         initComponents();
         setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(122, 201, 67));
         setVisible(true);
     }
 
@@ -42,11 +44,9 @@ public class HomeScreenUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FitWork");
-        setPreferredSize(new java.awt.Dimension(540, 540));
         setResizable(false);
 
         titleLabel.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 48)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(106, 185, 231));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("FitWork");
 

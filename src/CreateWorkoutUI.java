@@ -1,5 +1,6 @@
 
 import helper.Exercise;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     public CreateWorkoutUI() throws Exception {
         initComponents();
         setLocationRelativeTo(null);    //puts the window in the center of the screen
+        getContentPane().setBackground(new Color(255, 147, 30));
         setVisible(true);               // show the window
         loadExerciseMap();              // load the exercises in the the map
         loadInitialListData();
