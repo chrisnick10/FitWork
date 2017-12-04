@@ -2,6 +2,7 @@
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import helper.Exercise;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Array;
@@ -32,6 +33,7 @@ public class WorkoutLibraryUI extends javax.swing.JFrame {
     public WorkoutLibraryUI() throws Exception {
         initComponents();
         setLocationRelativeTo(null);    //puts the window in the center of the screen
+        getContentPane().setBackground(new Color(63, 169, 245));
         setVisible(true);               // show the window
         loadExerciseMap();              // load the exercises in the the map
         loadInitialListData();

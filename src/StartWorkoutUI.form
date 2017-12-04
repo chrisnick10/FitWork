@@ -155,7 +155,7 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="addSetButton" pref="60" max="32767" attributes="0"/>
+                          <Component id="addSetButton" max="32767" attributes="0"/>
                           <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
