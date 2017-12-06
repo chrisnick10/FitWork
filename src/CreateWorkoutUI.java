@@ -25,6 +25,9 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     private HashMap<String, Exercise> exerciseMap  = new HashMap<String, Exercise>();
     private Vector<String> unselectedExerciseNames = new Vector<String>();
     private Vector<String> selectedExerciseNames = new Vector<String>();
+    private String[] categoryStrings = {"Strength", "Cardio"};
+    private Vector<String> strengthExercises = new Vector<String>();
+    private Vector<String> cardioExercises = new Vector<String>();
     
     
     public CreateWorkoutUI() throws Exception {
@@ -37,9 +40,10 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     }
     
     public void loadInitialListData() {
-        for ( String item : exerciseMap.keySet()) {
+        for ( String item : strengthExercises) {
             unselectedExerciseNames.add(item);
         }
+        strengthRadioButton.setSelected(true);
         
         unselectedExerciseList.setListData(unselectedExerciseNames);
         selectedExerciseList.setListData(selectedExerciseNames);
@@ -57,6 +61,12 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
             String subCat = dataArray[1];               // second field is subcategory
             String name = dataArray[2];                 // third field is name
             String desc = "";
+            
+            if (cat.equals(categoryStrings[0])) {
+                strengthExercises.add(name);
+            } else if (cat.equals(categoryStrings[1])) {
+                cardioExercises.add(name);
+            }
             
             // this creates the string for the description because if there
             // were commas in the string it was split up
@@ -96,6 +106,8 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         removeExerciseButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        strengthRadioButton = new javax.swing.JRadioButton();
+        cardioRadioButton = new javax.swing.JRadioButton();
         helpButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -153,6 +165,20 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
 
         jLabel2.setText("Selected Exercises:");
 
+        strengthRadioButton.setText("Strength");
+        strengthRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                strengthRadioButtonActionPerformed(evt);
+            }
+        });
+
+        cardioRadioButton.setText("Cardio");
+        cardioRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardioRadioButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -161,25 +187,37 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addExerciseButton)
-                            .addComponent(removeExerciseButton)))
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(removeExerciseButton)
+                            .addComponent(addExerciseButton, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(strengthRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cardioRadioButton)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(139, 139, 139))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(strengthRadioButton)
+                        .addComponent(cardioRadioButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -222,9 +260,9 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(46, 46, 46)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -240,26 +278,6 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         dispose();
         new HomeScreenUI();
     }//GEN-LAST:event_backButtonActionPerformed
-
-    private void addExerciseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExerciseButtonActionPerformed
-        
-        String exercise = unselectedExerciseList.getSelectedValue();
-        selectedExerciseNames.add(exercise);
-        unselectedExerciseNames.remove(exercise);
-        
-        unselectedExerciseList.updateUI();
-        selectedExerciseList.updateUI();
-    }//GEN-LAST:event_addExerciseButtonActionPerformed
-
-    private void removeExerciseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeExerciseButtonActionPerformed
-        
-        String exercise = selectedExerciseList.getSelectedValue();
-        unselectedExerciseNames.add(exercise);
-        selectedExerciseNames.remove(exercise);
-        
-        selectedExerciseList.updateUI();
-        unselectedExerciseList.updateUI();
-    }//GEN-LAST:event_removeExerciseButtonActionPerformed
 
     private void startWorkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startWorkoutButtonActionPerformed
         // TODO add your handling code here:
@@ -279,6 +297,56 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Instructions", "Help", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_helpButtonActionPerformed
+
+    private void cardioRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardioRadioButtonActionPerformed
+        // TODO add your handling code here:
+        strengthRadioButton.setSelected(false);
+        unselectedExerciseList.setListData(cardioExercises);
+        unselectedExerciseList.updateUI();
+    }//GEN-LAST:event_cardioRadioButtonActionPerformed
+
+    private void strengthRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strengthRadioButtonActionPerformed
+        // TODO add your handling code here:
+        cardioRadioButton.setSelected(false);
+        unselectedExerciseList.setListData(strengthExercises);
+        unselectedExerciseList.updateUI();
+    }//GEN-LAST:event_strengthRadioButtonActionPerformed
+
+    private void removeExerciseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeExerciseButtonActionPerformed
+
+        String exercise = selectedExerciseList.getSelectedValue();
+        String exerciseCat = exerciseMap.get(exercise).getCategory();
+        
+        unselectedExerciseNames.add(exercise);
+        if (exerciseCat.equals(categoryStrings[0])) {
+            strengthExercises.add(exercise);
+        } else {
+            cardioExercises.add(exercise);
+        }
+        
+        selectedExerciseNames.remove(exercise);
+
+        selectedExerciseList.updateUI();
+        unselectedExerciseList.updateUI();
+    }//GEN-LAST:event_removeExerciseButtonActionPerformed
+
+    private void addExerciseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExerciseButtonActionPerformed
+
+        String exercise = unselectedExerciseList.getSelectedValue();
+        String exerciseCat = exerciseMap.get(exercise).getCategory();
+        
+        selectedExerciseNames.add(exercise);
+        unselectedExerciseNames.remove(exercise);
+        
+        if (exerciseCat.equals(categoryStrings[0])) {
+            strengthExercises.remove(exercise);
+        } else {
+            cardioExercises.remove(exercise);
+        }
+        
+        unselectedExerciseList.updateUI();
+        selectedExerciseList.updateUI();
+    }//GEN-LAST:event_addExerciseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,6 +390,7 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addExerciseButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JRadioButton cardioRadioButton;
     private javax.swing.JButton helpButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -331,6 +400,7 @@ public class CreateWorkoutUI extends javax.swing.JFrame {
     private javax.swing.JButton removeExerciseButton;
     private javax.swing.JList<String> selectedExerciseList;
     private javax.swing.JButton startWorkoutButton;
+    private javax.swing.JRadioButton strengthRadioButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JList<String> unselectedExerciseList;
     // End of variables declaration//GEN-END:variables

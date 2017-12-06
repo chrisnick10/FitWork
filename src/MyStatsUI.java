@@ -180,7 +180,7 @@ public class MyStatsUI extends javax.swing.JFrame {
             while (dataRow != null) {
                 String[] dataArray = dataRow.split(",");    // split along the commas
                 String exCat = dataArray[1];
-                System.out.println("Category found:" + exCat);
+                
                 
                 if (exCat.equals("Strength")) {
                     strengthCount++;

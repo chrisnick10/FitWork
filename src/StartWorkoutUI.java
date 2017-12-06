@@ -282,18 +282,26 @@ public class StartWorkoutUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String exName = exerciseList.getSelectedValue();
-        String catName = exerciseMap.get(exName).getCategory();
-        String setNumber = setNumberLabel.getText();
-        String repNumber = repTextField.getText();
         
-        String newExercise = exName + "," + catName + ", "+ setNumber + ", " + repNumber + "\n";
-        String summary = summaryTextArea.getText();
-        summaryTextArea.setText(summary + newExercise);
+        if (exName == null) {
+            System.out.println("You must select an exercise first");
+            JOptionPane.showMessageDialog(null, "You must select an exercise before you can add it.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            String catName = exerciseMap.get(exName).getCategory();
+            String setNumber = setNumberLabel.getText();
+            String repNumber = repTextField.getText();
+            
+            String newExercise = exName + "," + catName + ", "+ setNumber + ", " + repNumber + "\n";
+            String summary = summaryTextArea.getText();
+            summaryTextArea.setText(summary + newExercise);
         
-        int setNum = Integer.parseInt(setNumber);
-        setNum++;
-        setNumberLabel.setText(String.valueOf(setNum));
-       
+            int setNum = Integer.parseInt(setNumber);
+            setNum++;
+            setNumberLabel.setText(String.valueOf(setNum));
+        }
+         
+        
+  
     }//GEN-LAST:event_addSetButtonActionPerformed
 
     private void exerciseListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_exerciseListValueChanged
