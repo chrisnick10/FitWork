@@ -193,8 +193,6 @@ public class MyStatsUI extends javax.swing.JFrame {
             
             selectedWorkoutFileReader.close();
             
-            System.out.println("Number of cardio: " + cardioCount);
-            System.out.println("Number of strength: " + strengthCount);
             total = cardioCount + strengthCount;
             x = ((cardioCount / total) * 100);
             y = ((strengthCount / total) * 100);
@@ -231,9 +229,10 @@ public class MyStatsUI extends javax.swing.JFrame {
                 legendText.setPosition(RectangleEdge.BOTTOM);
                 chart.addSubtitle(legendText);}
         
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null); 
         frame.setSize(450,500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
         
     }//GEN-LAST:event_selectWorkoutButtonActionPerformed
 
